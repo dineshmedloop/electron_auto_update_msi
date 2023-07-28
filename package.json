@@ -1,0 +1,50 @@
+{
+  "name": "electron_auto_update_msi",
+  "version": "0.0.1",
+  "main": "main.js",
+  "description": "electron_auto_update_msi",
+  "author": "Matt Haggard",
+  "scripts": {
+    "publish": "electron-builder -p always",
+    "build": "electron-builder --win --x64",
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^14.0.1",
+    "electron-builder": "^23.0.3",
+    "electron-notarize": "^1.1.1"
+  },
+  "dependencies": {
+    "electron-log": "^4.4.1",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^4.3.9"
+  },
+  "build": {
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "dineshmedloop",
+        "repo": "electron_auto_update_msi"
+      }
+    ],
+    "appId": "com.electron_auto_update_msi",
+    "afterSign": "./build/notarize.js",
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "win": {
+      "target": "msi",
+      "icon": "./build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false
+    },
+    "msi": {
+      "oneClick": false
+    },
+    "linux": {
+      "category": "your.app.category.type",
+      "target": "AppImage"
+    }
+  }
+}
